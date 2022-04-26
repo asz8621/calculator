@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="reset.css">
+  <style>
+    body{
+      box-sizing: border-box;
+      line-height: 1.5;
+    }
+    .container{
+      max-width: 1320px;
+      margin: auto;
+      padding: 1rem;
+    }
+    .typeSelect{
+      margin-bottom: 1rem;
+    }
+    .radioType{
+      margin-bottom: 1rem;
+    }
+    .form-check-label{
+      padding-right: 1rem;
+    }
+    .typeTitle{
+      margin-bottom: 1rem;
+    }
+    .calculate{
+      width: 600px;
+      border: 1px solid #cfcfcf;
+      padding: 1rem;
+    }
+    .calculateTitle{
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    .subtitleA{
+      width: 400px;
+    }
+    .subtitleB{
+      width: 200px;
+    }
+    .calculateCol{
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .calculateCol.noResult {
+      justify-content: start;
+    }
+    .calculateContent{
+      display: flex;
+      align-items: center;
+      width: 200px;
+    }
+    .form-label{
+      width: 100px;
+    }
+    .form-input{
+      width: 45px;
+      text-align: center;
+      margin-right: 0.5rem;
+    }
+    .result{
+      width: 200px;
+    }
+    .green{
+      color: green;
+    }
+    .red{
+      color: red;
+    }
+    .blue{
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <label for="typeSelect">種類:</label>
+    <select name="typeSelect" id="typeSelect" class="typeSelect" onchange="changeTypeSelect(this)">
+      <option value="" disabled selected>請選擇</option>
+      <option value="鮮食">鮮食</option>
+      <option value="罐頭">罐頭</option>
+      <option value="飼料">飼料</option>
+    </select>
+    <div class="radioType">
+      <input type="radio" name="radioType" id="radioType1" value="0" checked>
+      <label class="form-check-label" for="radioType1">
+        3.5 : 8.5 : 3.5
+      </label>
+      <input type="radio" name="radioType" id="radioType2" value="1">
+      <label class="form-check-label" for="radioType2">
+        4 : 9 : 4
+      </label>
+    </div>
+    <div>
+      <p class="typeTitle">飼料熱量比計算</p>
+      <div class="calculate">
+        <div class="calculateTitle">
+          <p class="subtitleA">營養分析</p>
+          <p class="subtitleB">熱量比</p>
+        </div>
+        <div class="calculateCol">
+          <div class="calculateContent">
+            <label class="form-label" for="text1">
+              蛋白質：
+            </label>
+            <input class="form-input" type="text" id="text1" value="0">
+            <span>%</span>
+          </div>
+          <span>→</span>
+          <div class="result">
+            <spanc class="resNum1">0 %</spanc>
+            <span class="resText1">尚未計算</span>
+          </div>
+        </div>
+        <div class="calculateCol">
+          <div class="calculateContent">
+            <label class="form-label" for="text2">
+              脂肪：
+            </label>
+            <input class="form-input" type="text" id="text2" value="0">
+            <span>%</span>
+          </div>
+          <span>→</span>
+          <div class="result">
+            <spanc class="resNum2">0 %</spanc>
+            <span class="resText2">尚未計算</span>
+          </div>
+        </div>
+        <div class="calculateCol">
+          <div class="calculateContent">
+            <label class="form-label" for="text3">
+              碳水化合物：
+            </label>
+            <input class="form-input" type="text" id="text3" value="0">
+            <span>%</span>
+          </div>
+          <span>→</span>
+          <div class="result">
+            <spanc class="resNum3">0 %</spanc>
+            <span class="resText3">尚未計算</span>
+          </div>
+        </div>
+        <div class="calculateCol">
+          <div class="calculateContent">
+            <label class="form-label" for="text4">
+              熱量：
+            </label>
+            <input class="form-input" type="text" id="text4" value="0">
+            <span>100 g</span>
+          </div>
+          <span>→</span>
+          <div class="result">
+            <spanc class="resNum4">0 / 100 g</spanc>
+            <span class="resText4">尚未計算</span>
+          </div>
+        </div>
+        <div class="calculateCol noResult">
+          <label class="form-label" for="text5">
+            粗纖維：
+          </label>
+          <input class="form-input" type="text" id="text5" value="0">
+          <span>%</span>
+        </div>
+        <div class="calculateCol noResult">
+          <label class="form-label" for="text6">
+            水份：
+          </label>
+          <input class="form-input" type="text" id="text6" value="0">
+          <span>%</span>
+        </div>
+        <div class="calculateCol noResult">
+          <label class="form-label" for="text7">
+            灰份：
+          </label>
+          <input class="form-input" type="text" id="text7" value="0">
+          <span>%</span>
+        </div>
+        <div>
+          <button type="button" class="btn">試算</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script>
+  const text1 = document.querySelector('#text1')
+  const text2 = document.querySelector('#text2')
+  const text3 = document.querySelector('#text3')
+  const text4 = document.querySelector('#text4')
+  const text5 = document.querySelector('#text5')
+  const text6 = document.querySelector('#text6')
+  const text7 = document.querySelector('#text7')
+  const resNum1 = document.querySelector('.resNum1')
+  const resNum2 = document.querySelector('.resNum2')
+  const resNum3 = document.querySelector('.resNum3')
+  const resNum4 = document.querySelector('.resNum4')
+  const resText1 = document.querySelector('.resText1')
+  const resText2 = document.querySelector('.resText2')
+  const resText3 = document.querySelector('.resText3')
+  const resText4 = document.querySelector('.resText4')
+  const btn = document.querySelector('.btn')
+  const radio = document.getElementsByName('radioType')
+  const typeTitle = document.querySelector('.typeTitle')
+  const typeSelect = document.querySelector('.typeSelect')
+  const proportion = [
+    {
+      PR1: 3.5,
+      PR2: 8.5,
+      PR3: 3.5,
+    },
+    {
+      PR1: 4,
+      PR2: 9,
+      PR3: 4,
+    }
+  ]
+  btn.addEventListener('click', calculate)
+  function changeTypeSelect(data) {
+    typeTitle.textContent = `${data.value}熱量比計算`
+    switch (data.value) {
+      case '鮮食':
+        text5.value = 1
+        text6.value = 70
+        text7.value = 8
+        break
+      case '罐頭':
+        text5.value = 0.3
+        text6.value = 70
+        text7.value = 1.5
+        break
+      case '飼料':
+        text5.value = 5
+        text6.value = 10
+        text7.value = 7
+        break
+      default:
+        break
+    }
+  }
+  function calculate() {
+    if (!typeSelect.value) {
+      alert('請選擇種類')
+      return
+    }
+    let key = 0
+    let an4Min = 0
+    let an4Max = 0
+    // 取 radio value
+    for (let i = 0; i < radio.length; i++) {
+      if (radio[i].checked) key = radio[i].value
+    }
+    const ans1Temp = text1.value * proportion[key].PR1
+    const an2Temp = text2.value * proportion[key].PR2
+    const an3Temp = text3.value * proportion[key].PR1
+    const ans4 = (ans1Temp + an2Temp + proportion[key].PR1 * (text3.value - text5.value)).toFixed(1)
+    let ans1 = (ans1Temp / ans4 * 100).toFixed(1)
+    let ans2 = (an2Temp / ans4 * 100).toFixed(1)
+    let ans3 = ''
+    // 碳水化合物沒輸入數字的話給他另一個公式
+    if (text3.value === '0') {
+      ans3 = (100 - text1.value - text2.value - text6.value - text7.value).toFixed(1)
+    } else {
+      ans3 = (100 - ans1Temp - an2Temp).toFixed(1)
+    }
+    an4Min = ans4 - 20
+    an4Max = ans4 + 20
+    resNum1.textContent = `${ans1} %`
+    resNum2.textContent = `${ans2} %`
+    resNum3.textContent = `${ans3} %`
+    resNum4.textContent = `${ans4} / 100 g`
+    if (ans1 >= 30) {
+      resText1.classList.add('green')
+      resText1.textContent = '正常'
+    } else if (ans1 >= 20 && ans1 < 30) {
+      resText1.classList.add('blue')
+      resText1.textContent = '異常'
+    } else {
+      resText1.classList.add('red')
+      resText1.textContent = '偏低'
+    }
+    if (ans2 >= 20 && ans2 <= 50) {
+      resText2.classList.add('green')
+      resText2.textContent = '正常'
+    } else if (ans2 >= 0 && ans2 < 20) {
+      resText2.classList.add('blue')
+      resText2.textContent = '偏低'
+    } else {
+      resText2.classList.add('red')
+      resText2.textContent = '異常'
+    }
+    if (ans3 <= 20) {
+      resText3.classList.add('green')
+      resText3.textContent = '正常'
+    } else if (ans3 > 20 && ans3 < 50) {
+      resText3.classList.add('blue')
+      resText3.textContent = '偏高'
+    } else {
+      resText3.classList.add('red')
+      resText3.textContent = '異常'
+    }
+    if (!resNum4.value) {
+      resText4.classList.add('blue')
+      resText4.textContent = '僅試算值'
+    } else if (an4Min < ans4 && an4Max > ans4) {
+      resText4.classList.add('green')
+      resText4.textContent = '正常'
+    } else {
+      resText4.classList.add('red')
+      resText4.textContent = '異常'
+    }
+  }
+</script>
+</html>
