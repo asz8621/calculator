@@ -38,10 +38,10 @@
       margin-bottom: 1rem;
     }
     .subtitleA{
-      width: 400px;
+      width: 420px;
     }
     .subtitleB{
-      width: 200px;
+      width: 180px;
     }
     .calculateCol{
       margin-bottom: 1rem;
@@ -55,7 +55,7 @@
     .calculateContent{
       display: flex;
       align-items: center;
-      width: 200px;
+      width: 350px;
     }
     .form-label{
       width: 100px;
@@ -65,8 +65,12 @@
       text-align: center;
       margin-right: 0.5rem;
     }
+    .preset{
+      padding: 0 0.5rem;
+      color: #ad623f;
+    }
     .result{
-      width: 200px;
+      width: 180px;
     }
     .green{
       color: green;
@@ -141,6 +145,7 @@
             </label>
             <input class="form-input" type="text" id="text3" value="0">
             <span>%</span>
+            <span class="preset"></span>
           </div>
           <span>→</span>
           <div class="result">
@@ -154,7 +159,7 @@
               熱量：
             </label>
             <input class="form-input" type="text" id="text4" value="0">
-            <span>100 g</span>
+            <span>/ 100 g</span>
           </div>
           <span>→</span>
           <div class="result">
@@ -210,6 +215,7 @@
   const radio = document.getElementsByName('radioType')
   const typeTitle = document.querySelector('.typeTitle')
   const typeSelect = document.querySelector('.typeSelect')
+  const preset = document.querySelector('.preset')
   const proportion = [
     {
       PR1: 3.5,
@@ -257,19 +263,21 @@
     for (let i = 0; i < radio.length; i++) {
       if (radio[i].checked) key = radio[i].value
     }
-    const ans1Temp = text1.value * proportion[key].PR1
-    const an2Temp = text2.value * proportion[key].PR2
-    const an3Temp = text3.value * proportion[key].PR1
-    const ans4 = (ans1Temp + an2Temp + proportion[key].PR1 * (text3.value - text5.value)).toFixed(1)
-    let ans1 = (ans1Temp / ans4 * 100).toFixed(1)
-    let ans2 = (an2Temp / ans4 * 100).toFixed(1)
-    let ans3 = ''
+    const ansTemp1 = text1.value * proportion[key].PR1
+    const ansTemp2 = text2.value * proportion[key].PR2
+    const ansTemp3 = (100 - text1.value - text2.value - text6.value - text7.value).toFixed(1)
     // 碳水化合物沒輸入數字的話給他另一個公式
+    let ans4 = ''
     if (text3.value === '0') {
-      ans3 = (100 - text1.value - text2.value - text6.value - text7.value).toFixed(1)
+      ans4 = (ansTemp1 + ansTemp2 + proportion[key].PR1 * (ansTemp3 - text5.value)).toFixed(1)
+      preset.textContent = `試算的結果為 ${ansTemp3} %`
     } else {
-      ans3 = (100 - ans1Temp - an2Temp).toFixed(1)
+      ans4 = (ansTemp1 + ansTemp2 + proportion[key].PR1 * (ansTemp3 - text5.value)).toFixed(1)
     }
+
+    let ans1 = (ansTemp1 / ans4 * 100).toFixed(1)
+    let ans2 = (ansTemp2 / ans4 * 100).toFixed(1)
+    let ans3 = (100 - ans1 - ans2).toFixed(1)
     an4Min = ans4 - 20
     an4Max = ans4 + 20
     resNum1.textContent = `${ans1} %`
@@ -280,10 +288,10 @@
       resText1.classList.add('green')
       resText1.textContent = '正常'
     } else if (ans1 >= 20 && ans1 < 30) {
-      resText1.classList.add('blue')
+      resText1.classList.add('red')
       resText1.textContent = '異常'
     } else {
-      resText1.classList.add('red')
+      resText1.classList.add('blue')
       resText1.textContent = '偏低'
     }
     if (ans2 >= 20 && ans2 <= 50) {
