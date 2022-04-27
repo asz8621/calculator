@@ -81,6 +81,9 @@
     .blue{
       color: blue;
     }
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   </style>
 </head>
 <body>
@@ -115,7 +118,7 @@
             <label class="form-label" for="text1">
               蛋白質：
             </label>
-            <input class="form-input" type="text" id="text1" value="0">
+            <input class="form-input" type="number" id="text1" value="0" onchange="numTure(this)">
             <span>%</span>
           </div>
           <span>→</span>
@@ -129,7 +132,7 @@
             <label class="form-label" for="text2">
               脂肪：
             </label>
-            <input class="form-input" type="text" id="text2" value="0">
+            <input class="form-input" type="number" id="text2" value="0" onchange="numTure(this)">
             <span>%</span>
           </div>
           <span>→</span>
@@ -143,7 +146,7 @@
             <label class="form-label" for="text3">
               碳水化合物：
             </label>
-            <input class="form-input" type="text" id="text3" value="0">
+            <input class="form-input" type="number" id="text3" value="0" onchange="numTure(this)">
             <span>%</span>
             <span class="preset"></span>
           </div>
@@ -158,7 +161,7 @@
             <label class="form-label" for="text4">
               熱量：
             </label>
-            <input class="form-input" type="text" id="text4" value="0">
+            <input class="form-input" type="number" id="text4" value="0" onchange="numTure(this)">
             <span>/ 100 g</span>
           </div>
           <span>→</span>
@@ -171,21 +174,21 @@
           <label class="form-label" for="text5">
             粗纖維：
           </label>
-          <input class="form-input" type="text" id="text5" value="0">
+          <input class="form-input" type="number" id="text5" value="0" onchange="numTure(this)">
           <span>%</span>
         </div>
         <div class="calculateCol noResult">
           <label class="form-label" for="text6">
             水份：
           </label>
-          <input class="form-input" type="text" id="text6" value="0">
+          <input class="form-input" type="number" id="text6" value="0" onchange="numTure(this)">
           <span>%</span>
         </div>
         <div class="calculateCol noResult">
           <label class="form-label" for="text7">
             灰份：
           </label>
-          <input class="form-input" type="text" id="text7" value="0">
+          <input class="form-input" type="number" id="text7" value="0" onchange="numTure(this)">
           <span>%</span>
         </div>
         <div>
@@ -250,6 +253,9 @@
       default:
         break
     }
+  }
+  function numTure(dom) {
+    if (dom.value < 0 || !dom.value) dom.value = 0
   }
   function calculate() {
     if (!typeSelect.value) {
