@@ -254,6 +254,28 @@
         break
     }
   }
+  function hasClass(el, className) {
+    if (el.classList) {
+      return el.classList.contains(className);
+    } else {
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+    }
+  }
+  function addClass(el, className) {
+    if (el.classList) {
+      el.classList.add(className);
+    } else if (!hasClass(el, className)) {
+      el.className += " " + className;
+    }
+  }
+  function removeClass(el, className) {
+    if (el.classList) {
+      el.classList.remove(className);
+    } else if (hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+      el.className=el.className.replace(reg, ' ');
+    }
+  }
   function numTure(dom) {
     if (dom.value < 0 || !dom.value) dom.value = 0
   }
@@ -291,43 +313,67 @@
     resNum3.textContent = `${ans3} %`
     resNum4.textContent = `${ans4} / 100 g`
     if (ans1 >= 30) {
-      resText1.classList.add('green')
+      if (hasClass(resText1, 'red')) resText1.classList.remove('red')
+      if (hasClass(resText1, 'blue')) resText1.classList.remove('blue')
+      addClass(resText1, 'green')
       resText1.textContent = '正常'
     } else if (ans1 >= 20 && ans1 < 30) {
-      resText1.classList.add('red')
+      if (hasClass(resText1, 'green')) resText1.classList.remove('green')
+      if (hasClass(resText1, 'blue')) resText1.classList.remove('blue')
+      addClass(resText1, 'red')
       resText1.textContent = '異常'
     } else {
-      resText1.classList.add('blue')
+      if (hasClass(resText1, 'green')) resText1.classList.remove('green')
+      if (hasClass(resText1, 'red')) resText1.classList.remove('red')
+      addClass(resText1, 'blue')
       resText1.textContent = '偏低'
     }
     if (ans2 >= 20 && ans2 <= 50) {
-      resText2.classList.add('green')
+      if (hasClass(resText2, 'blue')) resText2.classList.remove('blue')
+      if (hasClass(resText2, 'red')) resText2.classList.remove('red')
+      addClass(resText2, 'green')
       resText2.textContent = '正常'
     } else if (ans2 >= 0 && ans2 < 20) {
-      resText2.classList.add('blue')
+      if (hasClass(resText2, 'green')) resText2.classList.remove('green')
+      if (hasClass(resText2, 'red')) resText2.classList.remove('red')
+      addClass(resText2, 'blue')
       resText2.textContent = '偏低'
     } else {
-      resText2.classList.add('red')
+      if (hasClass(resText2, 'blue')) resText2.classList.remove('blue')
+      if (hasClass(resText2, 'green')) resText2.classList.remove('green')
+      addClass(resText2, 'red')
       resText2.textContent = '異常'
     }
     if (ans3 <= 20) {
-      resText3.classList.add('green')
+      if (hasClass(resText3, 'blue')) resText3.classList.remove('blue')
+      if (hasClass(resText3, 'red')) resText3.classList.remove('red')
+      addClass(resText3, 'green')
       resText3.textContent = '正常'
     } else if (ans3 > 20 && ans3 < 50) {
-      resText3.classList.add('blue')
+      if (hasClass(resText3, 'red')) resText3.classList.remove('red')
+      if (hasClass(resText3, 'green')) resText3.classList.remove('green')
+      addClass(resText3, 'blue')
       resText3.textContent = '偏高'
     } else {
-      resText3.classList.add('red')
+      if (hasClass(resText3, 'blue')) resText3.classList.remove('blue')
+      if (hasClass(resText3, 'green')) resText3.classList.remove('green')
+      addClass(resText3, 'red')
       resText3.textContent = '異常'
     }
     if (!resNum4.value) {
-      resText4.classList.add('blue')
+      if (hasClass(resText4, 'green')) resText4.classList.remove('green')
+      if (hasClass(resText4, 'red')) resText4.classList.remove('red')
+      addClass(resText4, 'blue')
       resText4.textContent = '僅試算值'
     } else if (an4Min < ans4 && an4Max > ans4) {
-      resText4.classList.add('green')
+      if (hasClass(resText4, 'blue')) resText4.classList.remove('blue')
+      if (hasClass(resText4, 'red')) resText4.classList.remove('red')
+      addClass(resText4, 'green')
       resText4.textContent = '正常'
     } else {
-      resText4.classList.add('red')
+      if (hasClass(resText4, 'blue')) resText4.classList.remove('blue')
+      if (hasClass(resText4, 'green')) resText4.classList.remove('green')
+      addClass(resText4, 'red')
       resText4.textContent = '異常'
     }
   }
