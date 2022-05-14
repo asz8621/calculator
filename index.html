@@ -16,17 +16,8 @@
       margin: auto;
       padding: 1rem;
     }
-    .typeSelect{
-      margin-bottom: 1rem;
-    }
-    .radioType{
-      margin-bottom: 1rem;
-    }
     .form-check-label{
       padding-right: 1rem;
-    }
-    .typeTitle{
-      margin-bottom: 1rem;
     }
     .calculate{
       width: 600px;
@@ -35,7 +26,6 @@
     }
     .calculateTitle{
       display: flex;
-      margin-bottom: 1rem;
     }
     .subtitleA{
       width: 420px;
@@ -44,7 +34,6 @@
       width: 180px;
     }
     .calculateCol{
-      margin-bottom: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -84,122 +73,139 @@
     input[type=number]::-webkit-inner-spin-button {
       -webkit-appearance: none;
     }
+    .computingBlock{
+      display: flex;
+    }
+    .mb-1 {
+      margin-bottom: 0.5rem;
+    }
+    .mb-2 {
+      margin-bottom: 1rem;
+    }
+    .me-3{
+      margin-right: 2rem;
+    }
   </style>
 </head>
 <body>
 
   <main class="container">
-    <label for="typeSelect">種類:</label>
-    <select name="typeSelect" id="typeSelect" class="typeSelect" onchange="changeTypeSelect(this)">
-      <option value="" disabled selected>請選擇</option>
-      <option value="鮮食">鮮食</option>
-      <option value="罐頭">罐頭</option>
-      <option value="飼料">飼料</option>
-    </select>
-    <div class="radioType">
-      <input type="radio" name="radioType" id="radioType1" value="0" checked>
-      <label class="form-check-label" for="radioType1">
+    <div class="mb-1">
+      <label for="typeSelect">種類:</label>
+      <select name="typeSelect" id="typeSelect" class="typeSelect" onchange="changeTypeSelect(this)">
+        <option value="" disabled selected>請選擇</option>
+        <option value="鮮食">鮮食</option>
+        <option value="罐頭">罐頭</option>
+        <option value="飼料">飼料</option>
+      </select>
+    </div>
+    <div class="radioType mb-1">
+      <input type="radio" name="ratioType" id="ratioType1" value="0" checked>
+      <label class="form-check-label" for="ratioType1">
         3.5 : 8.5 : 3.5
       </label>
-      <input type="radio" name="radioType" id="radioType2" value="1">
-      <label class="form-check-label" for="radioType2">
+      <input type="radio" name="ratioType" id="ratioType2" value="1">
+      <label class="form-check-label" for="ratioType2">
         4 : 9 : 4
       </label>
     </div>
-    <div>
-      <h2 class="typeTitle">飼料熱量比計算</h2>
+    <div class="mb-2">
+      <h2 class="typeTitle mb-1">飼料熱量比計算</h2>
       <div class="calculate">
-        <div class="calculateTitle">
+        <div class="calculateTitle mb-2">
           <p class="subtitleA">營養分析</p>
           <p class="subtitleB">熱量比</p>
         </div>
-        <div class="calculateCol">
+        <div class="calculateCol mb-2">
           <div class="calculateContent">
-            <label class="form-label" for="text1">
+            <label class="form-label" for="proteinNum">
               蛋白質：
             </label>
-            <input class="form-input" type="number" id="text1" value="0" onchange="numTure(this)">
+            <input class="form-input" type="number" id="proteinNum" value="0" onchange="numTure(this)">
             <span>%</span>
           </div>
           <span>→</span>
           <div class="result">
-            <spanc class="resNum1">0 %</spanc>
-            <span class="resText1">尚未計算</span>
+            <spanc class="resultProteinNum">0 %</spanc>
+            <span class="resultProteinText">尚未計算</span>
           </div>
         </div>
-        <div class="calculateCol">
+        <div class="calculateCol mb-2">
           <div class="calculateContent">
-            <label class="form-label" for="text2">
+            <label class="form-label" for="adiposeNum">
               脂肪：
             </label>
-            <input class="form-input" type="number" id="text2" value="0" onchange="numTure(this)">
+            <input class="form-input" type="number" id="adiposeNum" value="0" onchange="numTure(this)">
             <span>%</span>
           </div>
           <span>→</span>
           <div class="result">
-            <spanc class="resNum2">0 %</spanc>
-            <span class="resText2">尚未計算</span>
+            <spanc class="resultAdiposeNum">0 %</spanc>
+            <span class="resultAdiposeText">尚未計算</span>
           </div>
         </div>
-        <div class="calculateCol">
+        <div class="calculateCol mb-2">
           <div class="calculateContent">
-            <label class="form-label" for="text3">
+            <label class="form-label" for="carbohydrateNum">
               碳水化合物：
             </label>
-            <input class="form-input" type="number" id="text3" value="0" onchange="numTure(this)">
+            <input class="form-input" type="number" id="carbohydrateNum" value="0" onchange="numTure(this)">
             <span>%</span>
-            <span class="preset"></span>
+            <span class="carbohydratePreset"></span>
           </div>
           <span>→</span>
           <div class="result">
-            <spanc class="resNum3">0 %</spanc>
-            <span class="resText3">尚未計算</span>
+            <spanc class="resultCarbohydrateNum">0 %</spanc>
+            <span class="resultCarbohydrateText">尚未計算</span>
           </div>
         </div>
-        <div class="calculateCol">
+        <div class="calculateCol mb-2">
           <div class="calculateContent">
-            <label class="form-label" for="text4">
+            <label class="form-label" for="calorieNum">
               熱量：
             </label>
-            <input class="form-input" type="number" id="text4" value="0" onchange="numTure(this)">
+            <input class="form-input" type="number" id="calorieNum" value="0" onchange="numTure(this)">
             <span>/ 100 g</span>
           </div>
           <span>→</span>
           <div class="result">
-            <spanc class="resNum4">0 / 100 g</spanc>
-            <span class="resText4">尚未計算</span>
+            <spanc class="resultCalorieNum">0 / 100 g</spanc>
+            <span class="resultCalorieText">尚未計算</span>
           </div>
         </div>
-        <div class="calculateCol noResult">
-          <label class="form-label" for="text5">
+        <div class="calculateCol mb-2 noResult">
+          <label class="form-label" for="crudeNum">
             粗纖維：
           </label>
-          <input class="form-input" type="number" id="text5" value="0" onchange="numTure(this)">
+          <input class="form-input" type="number" id="crudeNum" value="0" onchange="numTure(this)">
           <span>%</span>
         </div>
-        <div class="calculateCol noResult">
-          <label class="form-label" for="text6">
+        <div class="calculateCol mb-2 noResult">
+          <label class="form-label" for="moisture">
             水份：
           </label>
-          <input class="form-input" type="number" id="text6" value="0" onchange="numTure(this)">
+          <input class="form-input" type="number" id="moisture" value="0" onchange="numTure(this)">
           <span>%</span>
         </div>
-        <div class="calculateCol noResult">
-          <label class="form-label" for="text7">
+        <div class="calculateCol mb-2 noResult">
+          <label class="form-label" for="ash">
             灰份：
           </label>
-          <input class="form-input" type="number" id="text7" value="0" onchange="numTure(this)">
+          <input class="form-input" type="number" id="ash" value="0" onchange="numTure(this)">
           <span>%</span>
         </div>
         <div>
-          <button type="button" class="btn">試算</button>
+          <div class="errorMeg red"></div>
+          <button type="button" class="calculateBtn">試算</button>
         </div>
       </div>
     </div>
+
     <hr>
-    <div>
-      <h2 class="typeTitle">寵物每日所需熱量</h2>
-      <div class="radioType">
+
+    <h2 class="typeTitle mb-1">寵物每日所需熱量</h2>
+    <div class="calculate">
+      <div class="radioType mb-1">
         <input type="radio" name="petType" id="dogRadio" value="0" checked onclick="petTypeRadio('0')">
         <label class="form-check-label" for="dogRadio">
           狗
@@ -209,29 +215,40 @@
           貓
         </label>
       </div>
-      <div>
+      <div class="mb-1">
         <label for="weight">體重 / 目標體重 (kg)</label>
-        <input type="text" name="weight" id="weight" onchange="dailyCalories()">
+        <input type="text" name="weight" id="weight" onchange="dailyCalories()" value="0">
       </div>
-      <div>
+      <div class="mb-1">
         <label for="weight">是否結渣</label>
-        <input type="radio" name="radioType" id="notNeuter" value="0" onclick="pneuterRadio('0')" checked>
+        <input type="radio" name="radioType mb-1" id="notNeuter" value="0" onclick="pneuterRadio('0')" checked>
         <label class="form-check-label" for="notNeuter">
           未結紮
         </label>
-        <input type="radio" name="radioType" id="neutered" value="1" onclick="pneuterRadio('1')">
+        <input type="radio" name="radioType mb-1" id="neutered" value="1" onclick="pneuterRadio('1')">
         <label class="form-check-label" for="neutered">
           已結紮
         </label>
       </div>
-      <div>
-        <p>每日所需熱量 (kcal)</p>
-        <ul id="calculated">
-        </ul>
+      <div class="computingBlock mb-1">
+        <div>
+          <p class="mb-1">每日所需熱量 (kcal)</p>
+          <ul id="calculated" class="me-3">
+          </ul>
+        </div>
+        <div>
+          <p class="mb-1">每日需餵食量 (公克)</p>
+          <ul id="feedingAmount">
+          </ul>
+        </div>
       </div>
+      <p class="red">
+        公式計算結果是建議值<br>
+        每隻寵物的生理狀況、生活環境都不同，需要的熱量也不一樣<br>
+        需定期觀察寵物的體重變化來調整熱量！
+      </p>
     </div>
   </main>
 </body>
 <script src="calorieRatioCalculation.js"></script>
-<script src="dailyCalories.js"></script>
 </html>
